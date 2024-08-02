@@ -1,0 +1,44 @@
+version: "3.5"
+services:
+  gateway:
+    container_name: gateway
+    build:
+      context: ./gateway
+      dockerfile: dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./gateway:/home/app
+    working_dir: /home/app
+    command: sh -c "npm install && npm start"
+    networks:
+      main_network:
+  service1:
+    container_name: service1
+    build:
+      context: ./service1
+      dockerfile: dockerfile
+    ports:
+      - 3001:3001
+    volumes:
+      - ./service1:/home/app
+    working_dir: /home/app
+    command: sh -c "npm install && npm start"
+    networks:
+      main_network:
+  service2:
+    container_name: service2
+    build:
+      context: ./service2
+      dockerfile: dockerfile
+    ports:
+      - 3002:3002
+    volumes:
+      - ./service2:/home/app
+    working_dir: /home/app
+    command: sh -c "npm install && npm start"
+    networks:
+      main_network:
+networks:
+  main_network:
+    name: main_network
